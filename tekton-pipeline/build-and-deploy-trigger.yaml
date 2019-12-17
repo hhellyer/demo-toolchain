@@ -1,0 +1,60 @@
+apiVersion: tekton.dev/v1alpha1
+kind: TriggerTemplate
+metadata:
+  name: build-and-deploy-template
+spec:
+  params:
+  - name: gitrevision
+    description: The git revision
+    default: master
+  - name: gitrepositoryurl
+    description: The git repository url
+    default: https://github.com/hhellyer/notarepository.git
+  resourcetemplates:
+  - apiVersion: tekton.dev/v1alpha1
+    kind: PipelineResource
+    metadata:
+      name: source-repo-$(uid)
+    spec:
+      type: git
+      params:
+      - name: revision
+        value: $(params.gitrevision)
+      - name: url
+        value: $(params.gitrepositoryurl)
+  - apiVersion: tekton.dev/v1alpha1
+    kind: PipelineRun
+    metadata:
+      generateName: build-and-deploy-$(uid)
+    spec:
+      pipelineRef:
+        name: build-and-deploy-pipeline
+      resources:
+        - name: source-repo
+          resourceRef:
+            name: source-repo-$(uid)
+        - name: web-image
+          resourceRef:
+            name: web-image
+---
+apiVersion: tekton.dev/v1alpha1
+kind: TriggerBinding
+metadata:
+  name: build-and-deploy-binding
+spec:
+  params:
+    - name: gitrevision
+      value: $(body.revision)
+    - name: gitrepositoryurl
+      value: $(body.repository)
+---
+apiVersion: tekton.dev/v1alpha1
+kind: EventListener
+metadata:
+  name: build-and-deploy-listener
+spec:
+  triggers:
+    - binding:
+        name: build-and-deploy-binding
+      template:
+        name: build-and-deploy-template
