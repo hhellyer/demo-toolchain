@@ -27,6 +27,7 @@ spec:
     metadata:
       generateName: build-and-deploy-$(uid)
     spec:
+      serviceAccountName: tekton-triggers-admin
       pipelineRef:
         name: build-and-deploy-pipeline
       resources:
@@ -53,6 +54,7 @@ kind: EventListener
 metadata:
   name: build-and-deploy-listener
 spec:
+  serviceAccountName: tekton-triggers-admin
   triggers:
     - binding:
         name: build-and-deploy-binding
