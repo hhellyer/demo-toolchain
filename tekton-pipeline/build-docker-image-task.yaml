@@ -5,7 +5,7 @@ metadata:
 spec:
   inputs:
     resources:
-      - name: docker-source
+      - name: source-repo
         type: git
     params:
       - name: pathToDockerFile

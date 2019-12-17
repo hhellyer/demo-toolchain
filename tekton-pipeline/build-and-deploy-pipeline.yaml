@@ -19,7 +19,7 @@ spec:
           value: /workspace/docker-source/ #configure: may change according to your source
       resources:
         inputs:
-          - name: docker-source
+          - name: source-repo
             resource: source-repo
         outputs:
           - name: builtImage
