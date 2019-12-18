@@ -9,7 +9,7 @@ spec:
     - name: web-image
       type: image
   tasks:
-    - name: build-microclimate-go
+    - name: build-sample-go
       taskRef:
         name: build-app-from-git-source
       params:
@@ -29,7 +29,7 @@ spec:
     #       - name: image
     #         resource: web-image
     #         from:
-    #           -  build-microclimate-go
+    #           -  build-sample-go
     #   params:
     #     - name: path
     #       value: /workspace/source/deployment.yaml #configure: may change according to your source
