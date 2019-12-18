@@ -30,8 +30,8 @@ spec:
     #         resource: web-image
     #         from:
     #           -  build-microclimate-go
-      params:
-        - name: path
-          value: /workspace/source/deployment.yaml #configure: may change according to your source
-        - name: yamlPathToImage
-          value: "spec.template.spec.containers[0].image"
+    #   params:
+    #     - name: path
+    #       value: /workspace/source/deployment.yaml #configure: may change according to your source
+    #     - name: yamlPathToImage
+    #       value: "spec.template.spec.containers[0].image"
