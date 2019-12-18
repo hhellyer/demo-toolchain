@@ -13,16 +13,23 @@ spec:
         description:
         default: /workspace/source-repo
   steps:
-    - name: build-and-push
+    - name: compile
       image: golang:latest
-      workingDir: "${inputs.params.pathToSource}"
+      workingDir: "${inputs.params.pathToSource}/hello"
       command:
         - go
       args:
         - build
         - -o
-        - /mnt/build/main
-        - main.go
+        - /mnt/build/hello
+        - hello.go
+      volumeMounts:
+        - mountPath: /mnt/build
+          name: build-output
+    - name: run
+      image: ubuntu:latest
+      command:
+        - /mnt/build/hello
       volumeMounts:
         - mountPath: /mnt/build
           name: build-output
