@@ -11,30 +11,25 @@ spec:
   tasks:
     - name: build-microclimate-go
       taskRef:
-        name: build-docker-image-from-git-source
+        name: build-app-from-git-source
       params:
-        - name: pathToDockerFile
-          value: /workspace/source-repo/Dockerfile
         - name: pathToContext
           value: /workspace/source-repo/ #configure: may change according to your source
       resources:
         inputs:
           - name: source-repo
             resource: source-repo
-        outputs:
-          - name: builtImage
-            resource: web-image
-    - name: deploy-web
-      taskRef:
-        name: deploy-using-kubectl
-      resources:
-        inputs:
-          - name: source
-            resource: source-repo
-          - name: image
-            resource: web-image
-            from:
-              -  build-microclimate-go
+    # - name: deploy-web
+    #   taskRef:
+    #     name: deploy-using-kubectl
+    #   resources:
+    #     inputs:
+    #       - name: source
+    #         resource: source-repo
+    #       - name: image
+    #         resource: web-image
+    #         from:
+    #           -  build-microclimate-go
       params:
         - name: path
           value: /workspace/source/deployment.yaml #configure: may change according to your source
