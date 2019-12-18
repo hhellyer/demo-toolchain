@@ -8,14 +8,14 @@ spec:
       - name: source-repo
         type: git
     params:
-      - name: pathToContext
+      - name: pathToSource
         type: string
         description:
-        default: /workspace/docker-source
+        default: /workspace/source-repo
   steps:
     - name: build-and-push
       image: golang:latest
-      workingDir: "${inputs.params.pathToContext}"
+      workingDir: "${inputs.params.pathToSource}"
       command:
         - go
       args:

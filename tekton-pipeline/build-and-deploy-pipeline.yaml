@@ -13,7 +13,7 @@ spec:
       taskRef:
         name: build-app-from-git-source
       params:
-        - name: pathToContext
+        - name: pathToSource
           value: /workspace/source-repo/ #configure: may change according to your source
       resources:
         inputs:
