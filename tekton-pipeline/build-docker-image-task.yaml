@@ -20,10 +20,9 @@ spec:
         - go
       args:
         - build
-        - -v
-        - main.go
         - -o
         - /mnt/build/main
+        - main.go
       volumeMounts:
         - mountPath: /mnt/build
           name: build-output
