@@ -16,7 +16,7 @@ spec:
         - name: pathToDockerFile
           value: Dockerfile
         - name: pathToContext
-          value: /workspace/docker-source/ #configure: may change according to your source
+          value: /workspace/source-repo/ #configure: may change according to your source
       resources:
         inputs:
           - name: source-repo
